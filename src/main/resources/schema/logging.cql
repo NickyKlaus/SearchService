@@ -1,4 +1,4 @@
-CREATE TABLE auth.logs
+CREATE TABLE logs
 (
     id        timeuuid PRIMARY KEY,
     timeid    timeuuid,
@@ -6,7 +6,7 @@ CREATE TABLE auth.logs
     level     text,
     marker    text,
     logger    text,
-    timestamp timestamp,
+    timestamp date,
     mdc       map<text,text>,
     ndc       list<text>
 );

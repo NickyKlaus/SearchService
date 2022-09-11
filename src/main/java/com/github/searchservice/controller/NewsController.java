@@ -1,4 +1,4 @@
-package com.github.searchservice;
+package com.github.searchservice.controller;
 
 import com.github.searchservice.model.NewsItem;
 import org.springframework.http.HttpStatus;

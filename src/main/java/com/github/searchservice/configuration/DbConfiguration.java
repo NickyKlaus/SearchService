@@ -6,7 +6,6 @@ import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.core.convert.CassandraCustomConversions;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullApi;
 
 import java.util.List;
 
@@ -24,6 +23,12 @@ public class DbConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public @NonNull CassandraCustomConversions customConversions() {
-        return new CassandraCustomConversions(List.of(new AuthoritiesReadConverter()));
+        return new CassandraCustomConversions(
+                List.of(
+                        new AuthoritiesReadConverter(),
+                        new TimestampReadConverter(),
+                        new TimestampWriteConverter()
+                )
+        );
     }
 }
