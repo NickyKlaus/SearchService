@@ -3,6 +3,7 @@ package com.github.searchservice.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+import org.springframework.data.cassandra.config.SessionBuilderConfigurer;
 import org.springframework.data.cassandra.core.convert.CassandraCustomConversions;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.lang.NonNull;
@@ -17,6 +18,11 @@ public class DbConfiguration extends AbstractCassandraConfiguration {
     private String keyspace;
 
     @Override
+    protected SessionBuilderConfigurer getSessionBuilderConfigurer() {
+        return (sessionBuilder) -> sessionBuilder.addTypeCodecs(new TimestampCodec());
+    }
+
+    @Override
     protected String getKeyspaceName() {
         return keyspace;
     }
@@ -24,11 +30,7 @@ public class DbConfiguration extends AbstractCassandraConfiguration {
     @Override
     public @NonNull CassandraCustomConversions customConversions() {
         return new CassandraCustomConversions(
-                List.of(
-                        new AuthoritiesReadConverter(),
-                        new TimestampReadConverter(),
-                        new TimestampWriteConverter()
-                )
+                List.of(new AuthoritiesReadConverter())
         );
     }
 }
