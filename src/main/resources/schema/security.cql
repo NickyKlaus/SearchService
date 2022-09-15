@@ -6,10 +6,3 @@ CREATE TABLE IF NOT EXISTS persistent_logins(
 );
 
 DROP TABLE IF EXISTS persistent_logins;
-
-CREATE TABLE IF NOT EXISTS persistent_users(
-    username text PRIMARY KEY,
-    series_id set<text>
-);
-
-DROP TABLE IF EXISTS persistent_users;
